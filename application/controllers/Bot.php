@@ -25,7 +25,7 @@ public function __construct()
           
         
         // messagesをリプライで送信
-        $this->Line->reply($messages);
+        $this->Line->reply($messages,$event->reply_token);
     }
 
 

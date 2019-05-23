@@ -9,7 +9,7 @@ class Line extends CI_Model
         $this->load->model(['Db_mdl']);
     }
     const LINE_ACCESS_TOKEN = '{LINE_ACCESS_TOKEN}';
-    public function reply($messages)
+    public function reply($messages,$reply_token)
     {
         $url = 'https://api.line.me/v2/bot/message/reply';
         {
