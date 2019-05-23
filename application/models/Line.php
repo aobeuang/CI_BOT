@@ -80,4 +80,67 @@ class Line extends CI_Model
 
     }
 
+    public function gProfile($userid)
+    {
+        $userss = json_decode(api_profile($userid));
+            $userdetail = array (
+                              'type' => 'flex',
+                              'altText' => 'Flex Message',
+                              'contents' => 
+                              array (
+                                'type' => 'bubble',
+                                'hero' => 
+                                array (
+                                  'type' => 'image',
+                                  'url' => $userss->pictureUrl,
+                                  'size' => 'full',
+                                  'aspectRatio' => '20:13',
+                                  'aspectMode' => 'cover',
+                                  'action' => 
+                                  array (
+                                    'type' => 'uri',
+                                    'label' => 'Line',
+                                    'uri' => $userss->pictureUrl,
+                                  ),
+                                ),
+                                'footer' => 
+                                array (
+                                  'type' => 'box',
+                                  'layout' => 'vertical',
+                                  'flex' => 0,
+                                  'spacing' => 'sm',
+                                  'contents' => 
+                                  array (
+                                    0 => 
+                                    array (
+                                      'type' => 'spacer',
+                                      'size' => 'sm',
+                                    ),
+                                    1 => 
+                                    array (
+                                      'type' => 'text',
+                                      'text' => $userss->displayName,
+                                      'size' => 'xl',
+                                      'align' => 'center',
+                                      'gravity' => 'center',
+                                      'color' => '#050505',
+                                    ),
+                                    2 => 
+                                    array (
+                                      'type' => 'text',
+                                      'text' => '!! Welcome !!',
+                                      'size' => 'xl',
+                                      'align' => 'center',
+                                      'gravity' => 'center',
+                                      'weight' => 'bold',
+                                      'color' => '#1200FF',
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            );
+
+            return $userdetail;
+    }
+
 }
