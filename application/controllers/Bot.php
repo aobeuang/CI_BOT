@@ -25,8 +25,6 @@ public function __construct()
 	    $arrayHeader[] = "Authorization: Bearer {".LINE_ACCESS_TOKEN."}";
 
 	    $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
-	        $arrayPostData['messages'][0]['type'] = "text";
-	        $arrayPostData['messages'][0]['text'] = "สวัสดีจ้าาา";
 
         // // 返信メッセージの格納 (5件まで)
         // $messages = [
@@ -36,7 +34,7 @@ public function __construct()
           
         
         // messagesをリプライで送信
-        $this->Line->reply($arrayPostData,$arrayPostData['replyToken']);
+        $this->Line->reply("ssssss",$arrayPostData['replyToken']);
     }
 
 
