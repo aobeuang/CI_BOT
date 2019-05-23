@@ -8,6 +8,7 @@ class Line extends CI_Model
         parent::__construct();
         $this->load->model(['Db_mdl']);
     }
+
     const LINE_ACCESS_TOKEN = '{LINE_ACCESS_TOKEN}';
     public function replyMsg($arrayHeader,$arrayPostData){
         $strUrl = "https://api.line.me/v2/bot/message/reply";
@@ -22,6 +23,7 @@ class Line extends CI_Model
         $result = curl_exec($ch);
         curl_close ($ch);
     }
+
     public function api_profile($id)
     {
         // ユーザ情報を取得
@@ -31,18 +33,14 @@ class Line extends CI_Model
         $headers = ['Content-Type: application/json',
             'Authorization: Bearer ' . LINE_ACCESS_TOKEN];
 
-        // curlのオプション
-        $options = [CURLOPT_URL => $url,
-            CURLOPT_CUSTOMREQUEST => 'GET',
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_HTTPHEADER => $headers];
-        // curlセッションの実行
-        $curl = curl_init();
-        curl_setopt_array($curl, $options);
-        $response = curl_exec($curl);
-        curl_close($curl);
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+        $result = curl_exec($ch);
+        curl_close($ch);
 
-        return $response;
+        return $result;
 
     }
     public function api_content($id)
