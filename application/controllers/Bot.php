@@ -26,7 +26,7 @@ public function __construct()
         } else {
             // テキストメッセージのとき、内容によって分岐
             switch ($event->message_text) {
-                case $event->message_text == "みせて":
+                case $event->message_text == "555":
                     $messages[] =$this->case_view($messages);
                     break;
                 default:
