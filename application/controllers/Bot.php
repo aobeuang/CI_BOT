@@ -23,7 +23,7 @@ public function __construct()
 	    $arrayHeader = array();
 	    $arrayHeader[] = "Content-Type: application/json";
 	    $arrayHeader[] = "Authorization: Bearer {".LINE_ACCESS_TOKEN."}";
-	    if(strpos($message, '...') !== false){
+	    if(strpos_arr($message,'ดี')) !== false){
 	    $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
 	    $arrayPostData['messages'][0]['type'] = "text";
 	    $arrayPostData['messages'][0]['text'] = "555";
@@ -39,6 +39,14 @@ public function __construct()
         $arrayPostData['messages'][0] = $this->Line->gProfile($arrayJson['events'][0]['source']['userId']);
 
     }
+
+    function strpos_arr($haystack, $needle) {
+    if(!is_array($needle)) $needle = array($needle);
+    foreach($needle as $what) {
+        if(($pos = strpos($haystack, $what))!==false) return $pos;
+    }
+    return false;
+}
         
         // messagesをリプライで送信
         $this->Line->replyMsg($arrayHeader,$arrayPostData);
