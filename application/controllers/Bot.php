@@ -23,8 +23,8 @@ public function __construct()
 	    $arrayHeader = array();
 	    $arrayHeader[] = "Content-Type: application/json";
 	    $arrayHeader[] = "Authorization: Bearer {".LINE_ACCESS_TOKEN."}";
-	    $ss = array("ดี","สวัสดี","ดีจ้า","หวัดดี","Hello","Hi","โย่ว");
-	    if(strpos($message,'ดี')) !== false){
+	    
+	    if(strpos($message,'ดี') !== false){
 		$mass = $this->strpos_arr($ss,'ดี');
 	    $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
 	    $arrayPostData['messages'][0]['type'] = "text";
@@ -44,11 +44,13 @@ public function __construct()
     }
 
     
-        
+        $ss = array("ดี","สวัสดี","ดีจ้า","หวัดดี","Hello","Hi","โย่ว");
         // messagesをリプライで送信
-        $this->Line->replyMsg($arrayHeader,$arrayPostData);
+        //$this->Line->replyMsg($arrayHeader,$arrayPostData);
+        $mass = $this->strpos_arr($ss,'ดี');
+        echo $mass;
     }
-
+    
     function strpos_arr($haystack, $needle) {
     if(!is_array($needle)) $needle = array($needle);
     foreach($needle as $what) {
