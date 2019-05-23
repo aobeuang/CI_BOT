@@ -35,7 +35,8 @@ public function __construct()
           #ตัวอย่าง Message Type "Location"
     if(strpos($message, 'เทส') !== false){
         $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
-        $arrayPostData['messages'][0] = api_profile($arrayJson['events'][0]['source']['userId']);
+        $arrayPostData['messages'][0]['type'] = "text";
+        $arrayPostData['messages'][0]['text'] = api_profile($arrayJson['events'][0]['source']['userId']);
 
     }
         
