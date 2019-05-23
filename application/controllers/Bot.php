@@ -13,19 +13,30 @@ public function __construct()
     {
         // LINE Webhookから情報を受け取る
         $raw = file_get_contents('php://input');
-        $receive = json_decode($raw, true);
-        // receiveの一部をオブジェクトに整理
-        $event = $this->Line->hook_data($receive);
+        $arrayJson = json_decode($raw, true);
+     //    // receiveの一部をオブジェクトに整理
+     //    $event = $this->Line->hook_data($receive);
 
-        // 返信メッセージの格納 (5件まで)
-        $messages = [
-                        'type' => 'text',
-                        'text' => $event->message_text,
-                    ];
+     //    $content = file_get_contents('php://input');
+	    // $arrayJson = json_decode($content, true);
+	    
+	    $arrayHeader = array();
+	    $arrayHeader[] = "Content-Type: application/json";
+	    $arrayHeader[] = "Authorization: Bearer {."LINE_ACCESS_TOKEN."}";
+
+	    $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
+	        $arrayPostData['messages'][0]['type'] = "text";
+	        $arrayPostData['messages'][0]['text'] = "สวัสดีจ้าาา";
+
+        // // 返信メッセージの格納 (5件まで)
+        // $messages = [
+        //                 'type' => 'text',
+        //                 'text' => $event->message_text,
+        //             ];
           
         
         // messagesをリプライで送信
-        $this->Line->reply($messages,$event->reply_token);
+        $this->Line->reply($arrayPostData,$arrayPostData['replyToken']);
     }
 
 
