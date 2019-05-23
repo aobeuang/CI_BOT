@@ -35,8 +35,7 @@ public function __construct()
           #ตัวอย่าง Message Type "Location"
     if(strpos($message, 'เทส') !== false){
         $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
-        $arrayPostData['messages'][0]['type'] = "text";
-        $arrayPostData['messages'][0]['text'] = $this->Line->gProfile($arrayJson['events'][0]['source']['userId']);
+        $arrayPostData['messages'][0]= $this->Line->gProfile($arrayJson['events'][0]['source']['userId']);
 
     }
         
