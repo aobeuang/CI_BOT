@@ -23,17 +23,18 @@ public function __construct()
 	    $arrayHeader = array();
 	    $arrayHeader[] = "Content-Type: application/json";
 	    $arrayHeader[] = "Authorization: Bearer {".LINE_ACCESS_TOKEN."}";
-
+	    if(strpos($message, 'เทส') !== false){
 	    $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
 	    $arrayPostData['messages'][0]['type'] = "text";
 	    $arrayPostData['messages'][0]['text'] = "555";
+	}
         // // 返信メッセージの格納 (5件まで)
         // $messages = [
         //                 'type' => 'text',
         //                 'text' => $event->message_text,
         //             ];
           #ตัวอย่าง Message Type "Location"
-    if(strpos($message, 'เทส') !== false){
+    else if(strpos($message, 'เทส') !== false){
         $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
         $arrayPostData['messages'][0]= $this->Line->gProfile($arrayJson['events'][0]['source']['userId']);
 
