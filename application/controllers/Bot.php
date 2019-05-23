@@ -18,26 +18,12 @@ public function __construct()
         $event = $this->Line->hook_data($receive);
 
         // 返信メッセージの格納 (5件まで)
-        $messages = [];
-
-        if ($event->all['message']['type'] == "image") {
-            //もし画像が送られてきたら
-            $messages[] = $this->case_image($event->id,$event->userid);
-        } else {
-            // テキストメッセージのとき、内容によって分岐
-            switch ($event->message_text) {
-                case $event->message_text == "555":
-                    $messages[] =$this->case_view($messages);
-                    break;
-                default:
-                    // オウム返し
-                    $messages[] = [
+        $messages = [
                         'type' => 'text',
                         'text' => $event->message_text,
                     ];
-                    break;
-            }
-        }
+          
+        
         // messagesをリプライで送信
         $this->Line->reply($messages);
     }
