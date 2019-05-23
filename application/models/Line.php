@@ -82,7 +82,7 @@ class Line extends CI_Model
 
     public function gProfile($userid)
     {
-        $userss = json_decode(api_profile($userid));
+        $userss = json_decode($this->api_profile($userid));
             $userdetail = array (
                               'type' => 'flex',
                               'altText' => 'Flex Message',
