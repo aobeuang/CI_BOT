@@ -48,13 +48,15 @@ public function __construct()
     {
     	// เชื่อมต่อกับ LINE Messaging API
 		$httpClient = new CurlHTTPClient(LINE_MESSAGE_ACCESS_TOKEN);
-		$bot = new LINEBot($httpClient, array('channelSecret' => LINE_MESSAGE_CHANNEL_SECRET));
+		$this->Uline->bot = new LINEBot($httpClient, array('channelSecret' => LINE_MESSAGE_CHANNEL_SECRET));
 		 
 		// คำสั่งรอรับการส่งค่ามาของ LINE Messaging API
 		$content = file_get_contents('php://input');
 		 
 		// แปลงข้อความรูปแบบ JSON  ให้อยู่ในโครงสร้างตัวแปร array
 		$events = json_decode($content, true);
+
+		
 		$replyToken = NULL;
 		if(!is_null($events)){
 		    // ถ้ามีค่า สร้างตัวแปรเก็บ replyToken ไว้ใช้งาน
@@ -64,15 +66,8 @@ public function __construct()
 		// ส่วนของคำสั่งจัดเตียมรูปแบบข้อความสำหรับส่ง
 		$textMessageBuilder = new TextMessageBuilder(json_encode($events));
 		 
-		$response = $this->Uline->mano($bot,$replyToken,$textMessageBuilder);
-		//l ส่วนของคำสั่งตอบกลับข้อความ
-		// $response = $bot->replyMessage($replyToken,$textMessageBuilder);
-		// if ($response->isSucceeded()) {
-		//     echo 'Succeeded!';
-		//     return;
-		// }
-		 
-		// Failed
+		$response = $this->Uline->replyEvent($replyToken,$textMessageBuilder);
+
 		echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
     }
 
