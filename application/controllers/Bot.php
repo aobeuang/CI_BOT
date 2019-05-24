@@ -5,12 +5,16 @@ class Bot extends CI_Controller {
 public function __construct()
     {
         parent::__construct();
-        $this->load->model(['Botchan','Line', 'Db_mdl']);
-        $this->load->helper('url');
+        $this->load->model(['Botchan','Uline','Line', 'Db_mdl']);
+
     }
 
     public function index()
     {
+
+    	use LINE\LINEBot;
+use LINE\LINEBot\HTTPClient;
+use LINE\LINEBot\HTTPClient\CurlHTTPClient;
         // LINE Webhookから情報を受け取る
         $raw = file_get_contents('php://input');
         $arrayJson = json_decode($raw, true);
