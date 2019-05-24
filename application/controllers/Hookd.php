@@ -40,7 +40,7 @@ class Hookd extends CI_Controller {
 public function __construct()
     {
         parent::__construct();
-        $this->load->model(['Botchan','Uline','Line', 'Db_mdl']);
+        $this->load->model('Uline');
 
     }
 
@@ -64,15 +64,18 @@ public function __construct()
 		// ส่วนของคำสั่งจัดเตียมรูปแบบข้อความสำหรับส่ง
 		$textMessageBuilder = new TextMessageBuilder(json_encode($events));
 		 
+		$response = $this->Uline->mano($bot,$replyToken,$textMessageBuilder);
 		//l ส่วนของคำสั่งตอบกลับข้อความ
-		$response = $bot->replyMessage($replyToken,$textMessageBuilder);
-		if ($response->isSucceeded()) {
-		    echo 'Succeeded!';
-		    return;
-		}
+		// $response = $bot->replyMessage($replyToken,$textMessageBuilder);
+		// if ($response->isSucceeded()) {
+		//     echo 'Succeeded!';
+		//     return;
+		// }
 		 
 		// Failed
 		echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
     }
+
+
 }
 

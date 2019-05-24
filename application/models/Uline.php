@@ -12,8 +12,16 @@ class Uline extends CI_Model
 
     }
 
-    public function mano()
+    public function mano($bot,$replyToken,$textMessageBuilder)
     {
+    	//l ส่วนของคำสั่งตอบกลับข้อความ
+		$response = $bot->replyMessage($replyToken,$textMessageBuilder);
+		if ($response->isSucceeded()) {
+		    echo 'Succeeded!';
+		    return;
+		}
+
+		return $response;
 
     }
 }
