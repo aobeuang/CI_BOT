@@ -26,7 +26,7 @@ public function __construct()
 	    
 	    $arrayHeader = array();
 	    $arrayHeader[] = "Content-Type: application/json";
-	    $arrayHeader[] = "Authorization: Bearer {".LINE_ACCESS_TOKEN."}";
+	    $arrayHeader[] = "Authorization: Bearer {".LINE_MESSAGE_ACCESS_TOKEN."}";
 	    
 	    $arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
 	    $arrayPostData['messages'][0]['type'] = "text";
