@@ -1,6 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
- 
+ use LINE\LINEBot;
+use LINE\LINEBot\HTTPClient;
+use LINE\LINEBot\HTTPClient\CurlHTTPClient;
 class Bot extends CI_Controller {
 public function __construct()
     {
@@ -12,9 +14,7 @@ public function __construct()
     public function index()
     {
 
-    	use LINE\LINEBot;
-use LINE\LINEBot\HTTPClient;
-use LINE\LINEBot\HTTPClient\CurlHTTPClient;
+
         // LINE Webhookから情報を受け取る
         $raw = file_get_contents('php://input');
         $arrayJson = json_decode($raw, true);
